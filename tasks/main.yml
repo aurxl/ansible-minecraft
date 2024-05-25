@@ -1,0 +1,28 @@
+---
+- name: Sanity checks
+  include_tasks: sanity-checks.yml
+
+- name: RHEL - Extra software
+  include_tasks: rhel-extra-software.yml
+  when: ansible_facts["os_family"] == "RedHat"
+
+- name: Debian - Extra software
+  include_tasks: debian-extra-software.yml
+  when: ansible_facts["os_family"] == "Debian"
+
+- name: user minecraft exist
+  become: true
+  ansible.builtin.user:
+    name: "{{ minecraft_user_name }}"
+    shell: "/bin/false"
+    create_home: false
+    state: present
+
+- name: Install path exist
+  become: true
+  ansible.builtin.file:
+    path: "{{ path }}"
+    state: directory
+    owner: "{{ minecraft_user_name }}"
+    group: "{{ minecraft_user_name }}"
+    mode: '0644'

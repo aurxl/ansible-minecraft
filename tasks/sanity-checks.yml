@@ -1,0 +1,22 @@
+---
+- block:
+  - name: Set instance infos
+    set_fact:
+      instance_infos: "{{ item }}"
+    when: item.version == version
+    loop: "{{ versions }}"
+  when: version != "latest"
+
+- name: set instance infos
+  set_fact:
+    instance_infos: "{{ versions[0] }}"
+  when: version == "latest"
+
+- name: Sanity check - Available version
+  assert:
+    that: instance_infos is defined
+    fail_msg: "Minecraft version {{ version }} not available."
+
+- name: Sanity check - Using following
+  debug:
+    var: instance_infos

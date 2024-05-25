@@ -1,0 +1,6 @@
+---
+- name: Install software
+  become: True
+  ansible.builtin.dnf:
+    name:
+      - "java-{{ instance_infos.javaVersion }}-openjdk-headless"
