@@ -1,16 +1,16 @@
 ---
 - name: Sanity checks
-  include_tasks: sanity-checks.yml
+  ansible.builtin.include_tasks: sanity-checks.yml
 
 - name: RHEL - Extra software
-  include_tasks: rhel-extra-software.yml
+  ansible.builtin.include_tasks: extra-software/rhel-extra-software.yml
   when: ansible_facts["os_family"] == "RedHat"
 
 - name: Debian - Extra software
-  include_tasks: debian-extra-software.yml
+  ansible.builtin.include_tasks: extra-software/debian-extra-software.yml
   when: ansible_facts["os_family"] == "Debian"
 
-- name: user minecraft exist
+- name: User minecraft exist
   become: true
   ansible.builtin.user:
     name: "{{ minecraft_user_name }}"
@@ -25,4 +25,7 @@
     state: directory
     owner: "{{ minecraft_user_name }}"
     group: "{{ minecraft_user_name }}"
-    mode: '0644'
+    mode: "u=rwx,g=rwx,o=rx"
+
+- name: Import Minecraft server stuff
+  ansible.builtin.import_tasks: minecraft-server.yml

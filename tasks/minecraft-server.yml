@@ -1,0 +1,30 @@
+---
+- name: Server JAR is present
+  become: true
+  ansible.builtin.get_url:
+    url: "{{ instance_infos.url }}"
+    checksum: "sha1:{{ instance_infos.sha1 }}"
+    owner: "{{ minecraft_user_name }}"
+    group: "{{ minecraft_user_name }}"
+    dest: "{{ path }}/server.jar"
+    mode: "u=rw,g=rw,o=r"
+
+- name: Copy eula agreement
+  become: true
+  ansible.builtin.copy:
+    src: "eula.txt"
+    dest: "{{ path }}/eula.txt"
+    mode: "u=rw,g=rw,o=r"
+    owner: "{{ minecraft_user_name }}"
+    group: "{{ minecraft_user_name }}"
+  when: eula
+
+- name: Template server properties
+  become: true
+  ansible.builtin.template:
+    src: "server.properties.j2"
+    dest: "{{ path }}/server.properties"
+    mode: "u=rw,g=rw,o=r"
+    owner: "{{ minecraft_user_name }}"
+    group: "{{ minecraft_user_name }}"
+

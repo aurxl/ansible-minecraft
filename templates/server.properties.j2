@@ -1,0 +1,7 @@
+{% for key, value in server_properties.items() %}
+{%  if key in ['rcon_port', 'query_port', 'rcon_password']%}
+{{ key | replace('_', '.')}}={{value}}
+{%  else %}
+{{ key | replace('_', '-')}}={{value}}
+{%  endif %}
+{% endfor %}

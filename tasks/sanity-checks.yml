@@ -1,4 +1,12 @@
 ---
+- name: Sanity check - Eula
+  assert:
+    that: eula is true
+    success_msg: "You agreed the to the eula."
+    fail_msg: |
+      You have to agree the eula (more infos about the eula: https://aka.ms/MinecraftEULA).
+      To agree the eula set 'eula: true'.
+
 - block:
   - name: Set instance infos
     set_fact:
