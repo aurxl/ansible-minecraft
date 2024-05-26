@@ -19,8 +19,10 @@ ProtectControlGroups=true
 User={{ minecraft_user_name }}
 Group={{ minecraft_user_name }}
 
+Environment="Java=/usr/lib/jvm/jre-{{ instance_infos.javaVersion }}-openjdk/bin/java"
+
 {% if minecraft.mod_engine == 'vanilla' %}
-ExecStart=/bin/sh -c '{% if minecraft.interactive %}/usr/bin/tmux new-session -d -s {{ service_name }} {% endif %}/usr/bin/java -Xmx{{ minecraft.max_mem }}G -Xms{{ minecraft.min_mem }}G -XX:+AlwaysPreTouch -jar -Dlog4j2.formatMsgNoLookups=true server.jar nogui'
+ExecStart=/bin/sh -c '{% if minecraft.interactive %}/usr/bin/tmux new-session -d -s {{ service_name }} {% endif %}${Java} -Xmx{{ minecraft.max_mem }}G -Xms{{ minecraft.min_mem }}G -XX:+AlwaysPreTouch -jar -Dlog4j2.formatMsgNoLookups=true server.jar nogui'
 {% endif %}
 
 {% if minecraft.interactive %}

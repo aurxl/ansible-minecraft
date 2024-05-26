@@ -6,3 +6,11 @@
     state: restarted
     daemon-reload: true
     enabled: true
+
+- name: reload minecraft-server
+  become:  true
+  ansible.builtin.systemd_service:
+    name: "{{ service_name }}.service"
+    state: reloaded
+    daemon-reload: true
+    enabled: true

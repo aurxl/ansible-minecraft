@@ -38,3 +38,78 @@
     owner: "{{ minecraft_user_name }}"
     group: "{{ minecraft_user_name }}"
   notify: restart minecraft-server
+
+- name: Build whitelist
+  ansible.builtin.include_tasks: whitelist.yml
+  loop: "{{ minecraft.whitelist }}"
+  loop_control:
+    loop_var: "name"
+  when: minecraft.whitelist != []
+
+- name: Template whitelist
+  become: true
+  ansible.builtin.template:
+    src: "whitelist.json.j2"
+    dest: "{{ minecraft.path }}/whitelist.json"
+    mode: "u=rw,g=rw,o=r"
+    owner: "{{ minecraft_user_name }}"
+    group: "{{ minecraft_user_name }}"
+  notify: reload minecraft-server
+  when: minecraft.whitelist != []
+
+- name: Remove world
+  become: true
+  ansible.builtin.file:
+      path: "{{ minecraft.path }}/world"
+      state: absent
+  notify: restart minecraft-server
+  when: remove_world
+
+- block:
+  - name: Archive custom world
+    delegate_to: localhost
+    ansible.builtin.archive:
+      path: "{{ minecraft.custom_world }}"
+      dest: "{{ minecraft.custom_world }}.tar.gz"
+      format: gz
+    register: archived_world
+
+  - name: Custom world is present (this may take some time)
+    become: True
+    ansible.builtin.copy:
+      src: "{{ archived_world.dest }}"
+      dest: "{{ minecraft.path }}"
+      mode: "u=rw,g=rw,o=r"
+      owner: "{{ minecraft_user_name }}"
+      group: "{{ minecraft_user_name }}"
+    register: remote_archive
+
+  - name: Unarchive custom world
+    become: true
+    ansible.builtin.unarchive:
+      src: "{{ remote_archive.dest }}"
+      dest: "{{ minecraft.path }}"
+      mode: "u=rw,g=rw,o=r"
+      owner: "{{ minecraft_user_name }}"
+      group: "{{ minecraft_user_name }}"
+      remote_src: yes
+    notify: restart minecraft-server
+
+  - name: Ensure correct access rights on custom world
+    become: True
+    ansible.builtin.file:
+      path: "{{ minecraft.path }}"
+      state: directory
+      recurse: true
+      mode: "u=rwx,g=rwx,o=rx"
+      owner: "{{ minecraft_user_name }}"
+      group: "{{ minecraft_user_name }}"
+
+  - name: Remove local created archive
+    delegate_to: localhost
+    ansible.builtin.file:
+      path: "{{ archived_world.dest }}"
+      state: absent
+
+
+  when: minecraft.custom_world != ''

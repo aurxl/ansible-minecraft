@@ -1,0 +1,19 @@
+---
+- name: Whitelist - Get UUID of name {{ name }}
+  ansible.builtin.uri:
+    url: "{{ mojang_api_username }}{{ name }}"
+    method: "GET"
+    body_format: "json"
+  ignore_errors: True
+  register: http_response
+
+- name: Check status code
+  ansible.builtin.debug:
+    msg: "Failed to find user {{ name }}."
+  when: http_response.status != 200
+
+- name: Save name and UUID
+  ansible.builtin.set_fact:
+    full_whitelist: "{{ full_whitelist + [http_response.json] }}"
+  when: http_response.status == 200
+

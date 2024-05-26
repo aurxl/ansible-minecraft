@@ -1,13 +1,6 @@
 ---
-- name: Java is installed
+- name: Install software
   become: True
   ansible.builtin.dnf:
-    name:
-      - "java-{{ instance_infos.javaVersion }}-openjdk-headless"
+    name: "{{ pkgs }}"
 
-- name: Tmux is installed
-  become: True
-  ansible.builtin.dnf:
-    name:
-      - tmux
-  when: minecraft.interactive

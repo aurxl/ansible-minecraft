@@ -8,6 +8,20 @@
       To agree the eula set 'eula: true'.
 
 - block:
+  - name: Check custom world dir
+    delegate_to: localhost
+    ansible.builtin.stat:
+      path: "{{ minecraft.custom_world }}"
+    register: check_custom_world_result
+  
+  - name: Sanity check - custom world dir
+    ansible.builtin.assert:
+      that: check_custom_world_result.stat.exists
+      success_msg: "Custom world dir found locally ({{ minecraft.custom_world }})."
+      fail_msg: "Couldn't find custom world dir locally ({{ minecraft.custom_world }})."
+  when: minecraft.custom_world != ''
+
+- block:
   - name: Set instance infos
     set_fact:
       instance_infos: "{{ item }}"

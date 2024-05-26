@@ -2,6 +2,21 @@
 - name: Sanity checks
   ansible.builtin.include_tasks: sanity-checks.yml
 
+- name: Add tmux to pkgs
+  ansible.builtin.set_fact:
+    pkgs: "{{ pkgs + ['tmux'] }}"
+  when: minecraft.interactive
+
+- name: Add tar to pkgs
+  ansible.builtin.set_fact:
+    pkgs: "{{ pkgs + ['tar'] }}"
+  when: minecraft.custom_world != ''
+
+- name: Add java to pkgs
+  ansible.builtin.set_fact:
+    pkgs: "{{ pkgs + ['java-{{ instance_infos.javaVersion }}-openjdk-headless'] }}"
+  when: minecraft.custom_world != ''
+
 - name: RHEL - Extra software
   ansible.builtin.include_tasks: extra-software/rhel-extra-software.yml
   when: ansible_facts["os_family"] == "RedHat"
