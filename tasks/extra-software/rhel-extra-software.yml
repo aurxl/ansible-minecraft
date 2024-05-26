@@ -10,4 +10,4 @@
   ansible.builtin.dnf:
     name:
       - tmux
-  when: interactive
+  when: minecraft.interactive

@@ -6,24 +6,24 @@
     checksum: "sha1:{{ instance_infos.sha1 }}"
     owner: "{{ minecraft_user_name }}"
     group: "{{ minecraft_user_name }}"
-    dest: "{{ path }}/server.jar"
+    dest: "{{ minecraft.path }}/server.jar"
     mode: "u=rw,g=rw,o=r"
 
 - name: Copy eula agreement
   become: true
   ansible.builtin.copy:
     src: "eula.txt"
-    dest: "{{ path }}/eula.txt"
+    dest: "{{ minecraft.path }}/eula.txt"
     mode: "u=rw,g=rw,o=r"
     owner: "{{ minecraft_user_name }}"
     group: "{{ minecraft_user_name }}"
-  when: eula
+  when: minecraft.eula
 
 - name: Template minecraft-server systemd service
   become: true
   ansible.builtin.template:
     src: "minecraft-server.service.j2"
-    dest: "/etc/systemd/system/minecraft-server.service"
+    dest: "/etc/systemd/system/{{ service_name }}.service"
     mode: "u=rw,g=rw,o=r"
     owner: "root"
     group: "root"
@@ -33,7 +33,7 @@
   become: true
   ansible.builtin.template:
     src: "server.properties.j2"
-    dest: "{{ path }}/server.properties"
+    dest: "{{ minecraft.path }}/server.properties"
     mode: "u=rw,g=rw,o=r"
     owner: "{{ minecraft_user_name }}"
     group: "{{ minecraft_user_name }}"

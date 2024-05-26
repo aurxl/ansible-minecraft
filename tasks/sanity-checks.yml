@@ -1,7 +1,7 @@
 ---
 - name: Sanity check - Eula
   assert:
-    that: eula is true
+    that: minecraft.eula is true
     success_msg: "You agreed the to the eula."
     fail_msg: |
       You have to agree the eula (more infos about the eula: https://aka.ms/MinecraftEULA).
@@ -11,19 +11,19 @@
   - name: Set instance infos
     set_fact:
       instance_infos: "{{ item }}"
-    when: item.version == version
+    when: item.version == minecraft.version
     loop: "{{ versions }}"
-  when: version != "latest"
+  when: minecraft.version != "latest"
 
 - name: set instance infos
   set_fact:
     instance_infos: "{{ versions[0] }}"
-  when: version == "latest"
+  when: minecraft.version == "latest"
 
 - name: Sanity check - Available version
   assert:
     that: instance_infos is defined
-    fail_msg: "Minecraft version {{ version }} not available."
+    fail_msg: "Minecraft version {{ minecraft.version }} not available."
 
 - name: Sanity check - Using following
   debug:

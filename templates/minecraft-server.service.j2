@@ -3,9 +3,9 @@ Description={{ service_description }}
 After=network.target
 
 [Service]
-WorkingDirectory={{ path }}
+WorkingDirectory={{ minecraft.path }}
 
-{% if interactive %}
+{% if minecraft.interactive %}
 Type=forking
 {% else %}
 Type=simple
@@ -19,11 +19,11 @@ ProtectControlGroups=true
 User={{ minecraft_user_name }}
 Group={{ minecraft_user_name }}
 
-{% if mod_engine == 'vanilla' %}
-ExecStart=/bin/sh -c '{% if interactive %}/usr/bin/tmux new-session -d -s minecraft-server {% endif %}/usr/bin/java -Xmx{{ max_mem }}G -Xms{{ min_mem }}G -XX:+AlwaysPreTouch -jar -Dlog4j2.formatMsgNoLookups=true server.jar nogui'
+{% if minecraft.mod_engine == 'vanilla' %}
+ExecStart=/bin/sh -c '{% if minecraft.interactive %}/usr/bin/tmux new-session -d -s {{ service_name }} {% endif %}/usr/bin/java -Xmx{{ minecraft.max_mem }}G -Xms{{ minecraft.min_mem }}G -XX:+AlwaysPreTouch -jar -Dlog4j2.formatMsgNoLookups=true server.jar nogui'
 {% endif %}
 
-{% if interactive %}
+{% if minecraft.interactive %}
 ExecStop=/bin/sh -c '/usr/bin/tmux send-keys -t minecraft-server.0 "stop" ENTER && /usr/bin/sleep 10'
 ExecReload=/bin/sh -c '/usr/bin/tmux send-keys -t minecraft-server.0 "reload" ENTER'
 {% else %}

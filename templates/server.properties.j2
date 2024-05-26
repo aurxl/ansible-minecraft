@@ -1,4 +1,4 @@
-{% for key, value in server_properties.items() %}
+{% for key, value in minecraft.server_properties.items() %}
 {%  if key in ['rcon_port', 'query_port', 'rcon_password']%}
 {{ key | replace('_', '.')}}={{value}}
 {%  else %}

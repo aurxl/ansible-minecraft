@@ -1,6 +1,7 @@
 ---
 minecraft_user_name: "minecraft"
-service_description: "Minecraft {{ version }} Server"
+service_name: "minecraft-server-{{ minecraft.version }}"
+service_description: "Minecraft {{ minecraft.version }} Server"
 service_restart_sec: 30
 service_timeout_stop_sec: 30
 

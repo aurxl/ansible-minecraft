@@ -21,7 +21,7 @@
 - name: Install path exist
   become: true
   ansible.builtin.file:
-    path: "{{ path }}"
+    path: "{{ minecraft.path }}"
     state: directory
     owner: "{{ minecraft_user_name }}"
     group: "{{ minecraft_user_name }}"
