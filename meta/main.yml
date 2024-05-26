@@ -1,9 +1,11 @@
 ---
 galaxy_info:
   author: aurxl
+  namespace: aurxl
+  role_name: minecraft
   description: Minecraft server for Linux
   license: "license (GPL-3.0)"
-  min_ansible_version: "2.15"
+  min_ansible_version: "2.13"
   platforms:
   - name: EL
     versions:
