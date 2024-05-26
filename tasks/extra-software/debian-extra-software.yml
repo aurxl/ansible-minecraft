@@ -2,12 +2,4 @@
 - name: Install software
   become: True
   ansible.builtin.apt:
-    name:
-      - "java-{{ instance_infos.javaVersion }}-openjdk-headless"
-
-- name: Install Tmux
-  become: True
-  ansible.builtin.apt:
-    name:
-      - tmux
-  when: minecraft.interactive
+    name: "{{ pkgs }}"
