@@ -8,13 +8,18 @@ This will create a minecraft user that will handle the minecraft server. This ro
 - RHEL based (Fedora, EL, Rocky, ...)
 - Debian based (Debian, Ubuntu, ...)
 
+#### Installation:
+```bash
+ansible-galaxy role install aurxl.minecraft
+```
+
 ## Usage
 - Set some [options](#options) in your playbook or host_var
   - Take a look at [example-host_var](#example-host_var)
 - If you want a new world, run your playbook with `-e "remove_world=true"`
   - Usefull when you previously added a `custom_world`, but now want to generate a new one
 - Connect to tmux session when `interactive` is enabled:
-    ```sh
+    ```bash
     sudo -u minecraft tmux a
     ```
 
