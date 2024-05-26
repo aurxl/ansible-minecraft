@@ -19,6 +19,16 @@
     group: "{{ minecraft_user_name }}"
   when: eula
 
+- name: Template minecraft-server systemd service
+  become: true
+  ansible.builtin.template:
+    src: "minecraft-server.service.j2"
+    dest: "/etc/systemd/system/minecraft-server.service"
+    mode: "u=rw,g=rw,o=r"
+    owner: "root"
+    group: "root"
+  notify: restart minecraft-server
+
 - name: Template server properties
   become: true
   ansible.builtin.template:
@@ -27,4 +37,4 @@
     mode: "u=rw,g=rw,o=r"
     owner: "{{ minecraft_user_name }}"
     group: "{{ minecraft_user_name }}"
-
+  notify: restart minecraft-server

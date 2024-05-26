@@ -1,5 +1,9 @@
 ---
 minecraft_user_name: "minecraft"
+service_description: "Minecraft {{ version }} Server"
+service_restart_sec: 30
+service_timeout_stop_sec: 30
+
 versions:
   - url: https://piston-data.mojang.com/v1/objects/5b868151bd02b41319f54c8d4061b8cae84e665c/server.jar
     sha1: 5b868151bd02b41319f54c8d4061b8cae84e665c
