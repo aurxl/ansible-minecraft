@@ -58,7 +58,8 @@ minecraft:
   min_mem: 2
   max_mem: 4
 
-  whitelist: []
+  whitelist:
+    - username
 
   server_properties:
     enable_jmx_monitoring: false
