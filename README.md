@@ -37,14 +37,20 @@ ansible-galaxy role install aurxl.minecraft
 - `eula` (bool): Agree the EULA (https://aka.ms/MinecraftEULA)
   - Default: `false`
 - `custom_world` (string): Path to a local saved `world` directory
+  - Default: None
   - When your `world` name is not "world", remember to set the `world` name in the `server_properties.level_name` option
 - `interactive` (bool): Run server in tmux session
+  - Default: true
   - Turning this off is **not** recommended
 - `min_mem` (int): Minimum memory option passed to jvm
+  - Default: 1
 - `max_mem` (int): Maximum memory option passed to jvm
+  - Default: 2
 - `whitelist` (list): List of usernames to be added to whitelist
-- `server_properties` (dict): set the usual options from `server.properties` file
-  - Note, that `-` and `.` **mus** be replaced by `_`
+  - Default: []
+- `server_properties` (dict): Set the usual options from `server.properties` file
+  - Default: Default `server.properties`
+  - Note, that `-` and `.` **must** be replaced by `_`
 
 ## Example host_var
 ```yaml
