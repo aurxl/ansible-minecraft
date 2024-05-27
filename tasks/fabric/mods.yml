@@ -1,7 +1,7 @@
 ---
 - name: Fabric - Get mod infos ("{{ mod.name }}")
   ansible.builtin.uri:
-    url: "{{ modrinth_api_project }}{{ mod.name }}/version/{{ mod.version }}"
+    url: "{{ modrinth_api_project }}{{ mod.name | replace(' ', '-')}}/version/{{ mod.version }}"
     method: "GET"
     body_format: "json"
   register: "mod_infos"
@@ -23,3 +23,4 @@
     group: "{{ minecraft_user_name }}"
     dest: "{{ minecraft.path }}/mods/{{ mod_infos.json.files[0].filename }}"
     mode: "u=rw,g=rw,o=r"
+  notify: restart minecraft-server
