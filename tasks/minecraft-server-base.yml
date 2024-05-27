@@ -110,6 +110,4 @@
     ansible.builtin.file:
       path: "{{ archived_world.dest }}"
       state: absent
-
-
   when: minecraft.custom_world != ''

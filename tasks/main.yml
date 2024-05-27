@@ -42,5 +42,9 @@
     group: "{{ minecraft_user_name }}"
     mode: "u=rwx,g=rwx,o=rx"
 
-- name: Import Minecraft server stuff
-  ansible.builtin.import_tasks: minecraft-server.yml
+- name: Import Minecraft base server stuff
+  ansible.builtin.import_tasks: minecraft-server-base.yml
+
+- name: Include Minecraft fabric server stuff
+  ansible.builtin.include_tasks: fabric/minecraft-server-fabric.yml
+  when: minecraft.mod_engine == "fabric"

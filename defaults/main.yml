@@ -14,6 +14,9 @@ minecraft:
 
   remove_world: false
 
+  local_mods: ""
+  mods: []
+
   server_properties:
     enable_jmx_monitoring: false
     level_seed:

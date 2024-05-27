@@ -1,0 +1,25 @@
+---
+- name: Fabric - Get mod infos ("{{ mod.name }}")
+  ansible.builtin.uri:
+    url: "{{ modrinth_api_project }}{{ mod.name }}/version/{{ mod.version }}"
+    method: "GET"
+    body_format: "json"
+  register: "mod_infos"
+
+- name: Fabric - Check available mod versions with minecraft version
+  ansible.builtin.assert:
+    that: instance_infos.version in mod_infos.json.game_versions
+    success_msg: "Mod {{ mod.name }} compatible with minecraft version."
+    fail_msg: |
+      Mod {{ mod }} incompatible with minecraft version.
+      Available versions {{ mod_infos.json.game_versions }}
+
+- name: Fabric - Mod {{ mod.name }} is present
+  become: true
+  ansible.builtin.get_url:
+    url: "{{ mod_infos.json.files[0].url }}"
+    checksum: "sha512:{{ mod_infos.json.files[0].hashes.sha512 }}"
+    owner: "{{ minecraft_user_name }}"
+    group: "{{ minecraft_user_name }}"
+    dest: "{{ minecraft.path }}/mods/{{ mod_infos.json.files[0].filename }}"
+    mode: "u=rw,g=rw,o=r"

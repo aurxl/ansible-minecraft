@@ -36,6 +36,17 @@ ansible-galaxy role install aurxl.minecraft
     -  1.17.1
 - `eula` (bool): Agree the EULA (https://aka.ms/MinecraftEULA)
   - Default: `false`
+- `mod_engine` (string): Enable Fabric mod server
+  - Default: "vanilla"
+- `mods` (list): A list of mods to install from modrinth
+  - Takes a dict with keys `name` and `version`
+    - Default: []
+    - Modrinth support
+    - `name`: Modrinth project name
+    - `version`: Version id -> [find my mod version id on modrinth](#find-my-mod-version-id-on-modrinth)
+- `local_mods` (string): Path to local mods dir you want to install
+  - Default: ""
+  - Will be merged with mods installed by `mods` option
 - `custom_world` (string): Path to a local saved `world` directory
   - Default: None
   - When your `world` name is not "world", remember to set the `world` name in the `server_properties.level_name` option
@@ -52,7 +63,14 @@ ansible-galaxy role install aurxl.minecraft
   - Default: Default `server.properties`
   - Note, that `-` and `.` **must** be replaced by `_`
 
+### Find my mod version id on modrinth
+
+1. Go to the Modrinth project page and click at the mod tab your desired version
+2. Navigate to `Metadata`
+3. Copy `Version ID`
+
 ## Example host_var
+#### Vanilla
 ```yaml
 minecraft:
   path: "/opt/minecraft-server"
@@ -128,4 +146,23 @@ minecraft:
     spawn_protection: 16
     resource_pack_sha1: 
     max_world_size: 29999984
+```
+
+#### Fabric
+```yaml
+minecraft:
+  path: "/opt/minecraft-server"
+  version: "latest"
+  mod_engine: "fabric"
+  eula: true
+
+  local_mods: "~/your/mod/folder"
+  mods:
+    - name: lithium
+      version: bAbb09VF
+    - name: fabric-api
+      version: sswM8UzU
+
+  min_mem: 2
+  max_mem: 4
 ```

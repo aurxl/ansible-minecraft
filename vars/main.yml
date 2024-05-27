@@ -8,6 +8,11 @@ service_timeout_stop_sec: 30
 
 full_whitelist: []
 mojang_api_username: https://api.mojang.com/users/profiles/minecraft/
+modrinth_api_project: https://api.modrinth.com/v2/project/
+
+vanillapp_mods:
+  - name: lithium
+    version: bAbb09VF
 
 pkgs: []
 

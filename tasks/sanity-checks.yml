@@ -14,12 +14,26 @@
       path: "{{ minecraft.custom_world }}"
     register: check_custom_world_result
   
-  - name: Sanity check - custom world dir
+  - name: Sanity check - Custom world dir
     ansible.builtin.assert:
       that: check_custom_world_result.stat.exists
       success_msg: "Custom world dir found locally ({{ minecraft.custom_world }})."
       fail_msg: "Couldn't find custom world dir locally ({{ minecraft.custom_world }})."
   when: minecraft.custom_world != ''
+
+- block:
+  - name: Check local mods dir
+    delegate_to: localhost
+    ansible.builtin.stat:
+      path: "{{ minecraft.local_mods }}"
+    register: check_local_mods_result
+  
+  - name: Sanity check - Local mods
+    ansible.builtin.assert:
+      that: check_local_mods_result.stat.exists
+      success_msg: "Local mods dir found ({{ minecraft.local_mods }})"
+      fail_msg: "Local mods dir not found ({{ minecraft.local_mods }})"
+  when: minecraft.local_mods != ''
 
 - block:
   - name: Set instance infos

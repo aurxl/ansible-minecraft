@@ -1,0 +1,16 @@
+---
+- name: Fabric - Mod path exist
+  become: true
+  ansible.builtin.file:
+    path: "{{ minecraft.path }}/mods"
+    state: directory
+    owner: "{{ minecraft_user_name }}"
+    group: "{{ minecraft_user_name }}"
+    mode: "u=rwx,g=rwx,o=rx"
+
+- name: Fabric - Downloading mods
+  ansible.builtin.include_tasks: mods.yml
+  loop: "{{ minecraft.mods }}"
+  loop_control:
+    loop_var: mod
+  when: minecraft.mods != []
