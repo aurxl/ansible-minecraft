@@ -1,13 +1,13 @@
 ---
-minecraft_user_name: "minecraft"
+minecraft_user_name: minecraft
 
-service_name: "minecraft-server"
+service_name: minecraft-server
 service_description: "Minecraft {{ minecraft.version }} Server"
 service_restart_sec: 30
 service_timeout_stop_sec: 30
 
 full_whitelist: []
-mojang_api_username: "https://api.mojang.com/users/profiles/minecraft/"
+mojang_api_username: https://api.mojang.com/users/profiles/minecraft/
 
 pkgs: []
 
@@ -36,4 +36,28 @@ versions:
     sha1: a16d67e5807f57fc4e550299cf20226194497dc2
     version: 1.17.1
     javaVersion: 16
+
+  - sha1: 1b557e7b033b583cd9f66746b7a9ab1ec1673ced
+    url: https://piston-data.mojang.com/v1/objects/1b557e7b033b583cd9f66746b7a9ab1ec1673ced/server.jar
+    version: 1.16.5
+    javaVersion: 8
   
+  - sha1: bb2b6b1aefcd70dfd1892149ac3a215f6c636b07
+    url: https://piston-data.mojang.com/v1/objects/bb2b6b1aefcd70dfd1892149ac3a215f6c636b07/server.jar
+    version: 1.15.2
+    javaVersion: 8
+  
+  - sha1: 3dc3d84a581f14691199cf6831b71ed1296a9fdf
+    url: https://piston-data.mojang.com/v1/objects/3dc3d84a581f14691199cf6831b71ed1296a9fdf/server.jar
+    version: 1.14.4
+    javaVersion: 8
+  
+  - sha1: 3737db93722a9e39eeada7c27e7aca28b144ffa7
+    url: https://piston-data.mojang.com/v1/objects/3737db93722a9e39eeada7c27e7aca28b144ffa7/server.jar
+    version: 1.13.2
+    javaVersion: 8
+  
+  - sha1: 886945bfb2b978778c3a0288fd7fab09d315b25f
+    url: https://piston-data.mojang.com/v1/objects/886945bfb2b978778c3a0288fd7fab09d315b25f/server.jar
+    version: 1.12.2
+    javaVersion: 8
