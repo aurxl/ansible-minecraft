@@ -1,9 +1,10 @@
 ---
-minecraft:
+minecraft: {}
+default_minecraft:
   path: "/opt/minecraft-server"
   version: "latest"
   custom_world: ""
-  eula: true
+  eula: false
 
   interactive: true
   min_mem: 1
