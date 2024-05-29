@@ -1,6 +1,6 @@
 # Ansible-Minecraft
 
-#### Installing Minecraft vanilla Server on Linux.
+#### Installing Minecraft vanilla or Fabric Server on Linux.
 
 This will create a minecraft user that will handle the minecraft server. This role will not configure or harden your linux server in any way. Take care of it yourself!
 
@@ -23,7 +23,13 @@ ansible-galaxy role install aurxl.minecraft
     sudo -u minecraft tmux a
     ```
 
+#### Fabric server
+It is also possible to install a [fabric](https://fabricmc.net/) server in order to play with mods enabled.
+See example [Fabric](#fabric) config below.
+
+
 ## Options
+#### General Server Options:
 - `path`  (string): Remote root path of the minecraft server
   - Default: "/opt/minecraft-server"
 - `version` (string): Minecraft version
@@ -36,17 +42,6 @@ ansible-galaxy role install aurxl.minecraft
     -  1.17.1
 - `eula` (bool): Agree the EULA (https://aka.ms/MinecraftEULA)
   - Default: `false`
-- `mod_engine` (string): Enable Fabric mod server
-  - Default: "vanilla"
-- `mods` (list): A list of mods to install from modrinth
-  - Takes a dict with keys `name` and `version`
-    - Default: []
-    - Modrinth support
-    - `name`: Modrinth project name
-    - `version`: Version id -> [find my mod version id on modrinth](#find-my-mod-version-id-on-modrinth)
-- `local_mods` (string): Path to local mods dir you want to install
-  - Default: ""
-  - Will be merged with mods installed by `mods` option
 - `custom_world` (string): Path to a local saved `world` directory
   - Default: None
   - When your `world` name is not "world", remember to set the `world` name in the `server_properties.level_name` option
@@ -62,6 +57,21 @@ ansible-galaxy role install aurxl.minecraft
 - `server_properties` (dict): Set the usual options from `server.properties` file
   - Default: Default `server.properties`
   - Note, that `-` and `.` **must** be replaced by `_`
+
+#### Fabric server options
+- `fabric` (dict): Install Fabric server
+  - `enable` (bool): wether to enable fabric or not
+    - Default: false
+  - `mods` (list): A list of mods to install from modrinth
+    - Takes a dict with keys `name` and `version`
+      - Default: []
+      - Modrinth support
+      - `name`: Modrinth project name
+      - `version`: Version id -> [find my mod version id on modrinth](#find-my-mod-version-id-on-modrinth)
+  - `local_mods` (string): Path to local mods dir you want to install
+    - Default: ""
+    - Will be merged with mods installed by `mods` option
+
 
 ### Find my mod version id on modrinth
 
@@ -153,15 +163,16 @@ minecraft:
 minecraft:
   path: "/opt/minecraft-server"
   version: "latest"
-  mod_engine: "fabric"
   eula: true
 
-  local_mods: "~/your/mod/folder"
-  mods:
-    - name: lithium
-      version: bAbb09VF
-    - name: fabric-api
-      version: sswM8UzU
+  fabric:
+    enabled: true
+    local_mods: "~/your/mod/folder"
+    mods:
+      - name: lithium
+        version: bAbb09VF
+      - name: fabric-api
+        version: sswM8UzU
 
   min_mem: 2
   max_mem: 4
