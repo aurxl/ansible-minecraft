@@ -47,4 +47,4 @@
 
 - name: Include Minecraft fabric server stuff
   ansible.builtin.include_tasks: fabric/minecraft-server-fabric.yml
-  when: minecraft.mod_engine == "fabric"
+  when: minecraft.fabric.enabled

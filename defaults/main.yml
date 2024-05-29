@@ -2,7 +2,6 @@
 minecraft:
   path: "/opt/minecraft-server"
   version: "latest"
-  mod_engine: "vanilla"
   custom_world: ""
   eula: true
 
@@ -14,8 +13,10 @@ minecraft:
 
   remove_world: false
 
-  local_mods: ""
-  mods: []
+  fabric:
+    enabled: false
+    local_mods: ""
+    mods: []
 
   server_properties:
     enable_jmx_monitoring: false

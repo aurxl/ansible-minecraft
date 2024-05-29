@@ -8,9 +8,39 @@
     group: "{{ minecraft_user_name }}"
     mode: "u=rwx,g=rwx,o=rx"
 
+- name: Fabric - Fabric installer is present
+  become: true
+  ansible.builtin.get_url:
+    url: "{{ fabric_installer_url }}"
+    checksum: "sha512:{{ fabric_installer_sha512 }}"
+    owner: "{{ minecraft_user_name }}"
+    group: "{{ minecraft_user_name }}"
+    dest: "{{ minecraft.path }}"
+    mode: "u=rw,g=rw,o=r"
+  register: fabric_installer_info
+
+- name: Fabric - Install Fabric
+  become: true
+  become_user: "{{ minecraft_user_name }}"
+  ansible.builtin.command: "java -jar {{ fabric_installer_info.dest }} server -mcversion {{ instance_infos.version }}"
+  args:
+    chdir: "{{ minecraft.path }}"
+  notify: restart minecraft-server
+  when: fabric_installer_info.changed
+
 - name: Fabric - Downloading mods
   ansible.builtin.include_tasks: mods.yml
-  loop: "{{ minecraft.mods }}"
+  loop: "{{ minecraft.fabric.mods }}"
   loop_control:
     loop_var: mod
-  when: minecraft.mods != []
+  when: minecraft.fabric.mods != []
+
+- name: Fabric - Local mods are uploaded
+  become: true
+  ansible.builtin.copy:
+    src: "{{ minecraft.fabric.local_mods }}"
+    dest: "{{ minecraft.path }}"
+    mode: "u=rw,g=rw,o=r"
+    owner: "{{ minecraft_user_name }}"
+    group: "{{ minecraft_user_name }}"
+  when: minecraft.fabric.local_mods != ""

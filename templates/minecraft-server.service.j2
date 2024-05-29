@@ -25,7 +25,7 @@ ExecStart=/bin/sh -c \
     '{% if minecraft.interactive %}/usr/bin/tmux new-session -d -s {{ service_name }}{% endif %} \
     ${Java} -Xmx{{ minecraft.max_mem }}G -Xms{{ minecraft.min_mem }}G -XX:+AlwaysPreTouch \
     -Dlog4j2.formatMsgNoLookups=true \
-    -jar server.jar \
+    -jar {% if minecraft.fabric.enabled %}fabric-server-launch.jar{% else %}server.jar{% endif %} \
     nogui'
 
 {% if minecraft.interactive %}

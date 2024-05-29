@@ -9,6 +9,8 @@ service_timeout_stop_sec: 30
 full_whitelist: []
 mojang_api_username: https://api.mojang.com/users/profiles/minecraft/
 modrinth_api_project: https://api.modrinth.com/v2/project/
+fabric_installer_url: https://maven.fabricmc.net/net/fabricmc/fabric-installer/1.0.1/fabric-installer-1.0.1.jar
+fabric_installer_sha512: 6e77702af63d9eb6e83adb01aa96a6e057811f524a7787ae48519cd85352f142c30a35f9d9c7794164726eb11e12ce664da6c3a40c8ada3e0294063f38f4636b
 
 vanillapp_mods:
   - name: lithium
