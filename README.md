@@ -71,6 +71,10 @@ See example [Fabric](#fabric) config below.
   - `local_mods` (string): Path to local mods dir you want to install
     - Default: ""
     - Will be merged with mods installed by `mods` option
+  - `config`: (list): list of mod configs that will be placed in `config`
+    - `name`: file name
+    - `content`: content of the config file
+    - `path`: local path of a config file
 
 
 ### Find my mod version id on modrinth
