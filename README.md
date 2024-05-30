@@ -173,6 +173,12 @@ minecraft:
         version: bAbb09VF
       - name: fabric-api
         version: sswM8UzU
+    config:
+      - name: fighters.properties
+        path: ~/foo/fighters.properties
+      - name: hitchhiker.guide
+        content: |
+            answer=42;
 
   min_mem: 2
   max_mem: 4
