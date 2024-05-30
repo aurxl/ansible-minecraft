@@ -18,6 +18,7 @@ default_minecraft:
     enabled: false
     local_mods: ""
     mods: []
+    config: []
 
   server_properties:
     enable_jmx_monitoring: false

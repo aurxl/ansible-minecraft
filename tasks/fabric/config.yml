@@ -1,0 +1,23 @@
+---
+- name: Fabric - Config content is present ({{ config.name }})
+  become: true
+  ansible.builtin.copy:
+    content: "{{ config.content }}"
+    dest: "{{ minecraft.path }}/config/{{ config.name }}"
+    mode: "u=rw,g=rw,o=r"
+    owner: "{{ minecraft_user_name }}"
+    group: "{{ minecraft_user_name }}"
+  notify: reload minecraft-server
+  when: config.content is defined and config.content != ""
+
+- name: Fabric - Config from local file is present ({{ config.path }})
+  become: true
+  ansible.builtin.copy:
+    src: "{{ config.path }}"
+    dest: "{{ minecraft.path }}/config/{{ config.name }}"
+    mode: "u=rw,g=rw,o=r"
+    owner: "{{ minecraft_user_name }}"
+    group: "{{ minecraft_user_name }}"
+  notify: reload minecraft-server
+  when: config.path is defined and config.path != ""
+

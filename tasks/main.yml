@@ -1,11 +1,7 @@
 ---
 - name: Combine defaults with vars
   ansible.builtin.set_fact:
-    minecraft: "{{ default_minecraft | combine(minecraft, recursive=true) }}"
-
-- name: debug minecraft directory
-  debug:
-    msg: "{{ minecraft }}"
+    minecraft: "{{ default_minecraft | ansible.builtin.combine(minecraft, recursive=true) }}"
 
 - name: Sanity checks
   ansible.builtin.include_tasks: sanity-checks.yml

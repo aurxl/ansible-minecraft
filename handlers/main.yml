@@ -1,6 +1,6 @@
 ---
 - name: restart minecraft-server
-  become:  true
+  become: true
   ansible.builtin.systemd_service:
     name: "{{ service_name }}.service"
     state: restarted
@@ -8,7 +8,7 @@
     enabled: true
 
 - name: reload minecraft-server
-  become:  true
+  become: true
   ansible.builtin.systemd_service:
     name: "{{ service_name }}.service"
     state: reloaded

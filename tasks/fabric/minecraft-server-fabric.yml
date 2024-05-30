@@ -8,6 +8,15 @@
     group: "{{ minecraft_user_name }}"
     mode: "u=rwx,g=rwx,o=rx"
 
+- name: Fabric - Config path exist
+  become: true
+  ansible.builtin.file:
+    path: "{{ minecraft.path }}/config"
+    state: directory
+    owner: "{{ minecraft_user_name }}"
+    group: "{{ minecraft_user_name }}"
+    mode: "u=rwx,g=rwx,o=rx"
+
 - name: Fabric - Fabric installer is present
   become: true
   ansible.builtin.get_url:
@@ -44,3 +53,10 @@
     owner: "{{ minecraft_user_name }}"
     group: "{{ minecraft_user_name }}"
   when: minecraft.fabric.local_mods != ""
+
+- name: Fabric - Configs are present
+  ansible.builtin.include_tasks: config.yml
+  loop: "{{ minecraft.fabric.config }}"
+  loop_control:
+    loop_var: config
+  when: minecraft.fabric.config != []
