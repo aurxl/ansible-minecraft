@@ -19,7 +19,6 @@
 - name: Add java to pkgs
   ansible.builtin.set_fact:
     pkgs: "{{ pkgs + ['java-{{ instance_infos.javaVersion }}-openjdk-headless'] }}"
-  when: minecraft.custom_world != ''
 
 - name: RHEL - Extra software
   ansible.builtin.include_tasks: extra-software/rhel-extra-software.yml
