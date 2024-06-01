@@ -1,4 +1,4 @@
-name: Publish ${{env.REPO_NAME}} on Ansible Galaxy
+name: Publish ${{env.NAME}} on Ansible Galaxy
 
 on:
   release:
