@@ -16,10 +16,6 @@
     pkgs: "{{ pkgs + ['tar'] }}"
   when: minecraft.custom_world != ''
 
-- name: Add java to pkgs
-  ansible.builtin.set_fact:
-    pkgs: "{{ pkgs + ['java-{{ instance_infos.javaVersion }}-openjdk-headless'] }}"
-
 - name: RHEL - Extra software
   ansible.builtin.include_tasks: extra-software/rhel-extra-software.yml
   when: ansible_facts["os_family"] == "RedHat"
