@@ -3,8 +3,7 @@
   ansible.builtin.uri:
     url: "{{ mojang_api_username }}{{ name }}"
     method: "GET"
-    body_format: "json"
-  ignore_errors: True
+  ignore_errors: true
   register: http_response
 
 - name: Check status code
