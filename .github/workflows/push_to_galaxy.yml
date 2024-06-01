@@ -10,4 +10,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Publish role
-        run: ansible-galaxy role import --token ${{secrets.GALAXY_TOKEN}} ${{github.REPOSITORY_OWNER}} $NAME
+        run: ansible-galaxy role import --token ${{secrets.GALAXY_TOKEN}} ${{github.REPOSITORY_OWNER}} ${{NAME}}
