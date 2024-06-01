@@ -1,6 +1,6 @@
 # Ansible-Minecraft
 
-[![Publish role on Ansible Galaxy](https://github.com/aurxl/ansible-minecraft/actions/workflows/push_to_galaxy.yml/badge.svg?branch=main&event=release)](https://github.com/aurxl/ansible-minecraft/actions/workflows/push_to_galaxy.yml)
+[![Publish role on Ansible Galaxy](https://github.com/aurxl/ansible-minecraft/actions/workflows/push_to_galaxy.yml/badge.svg)](https://github.com/aurxl/ansible-minecraft/actions/workflows/push_to_galaxy.yml)
 
 #### Installing Minecraft vanilla or Fabric Server on Linux.
 
