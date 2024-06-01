@@ -2,7 +2,7 @@ name: Publish role on Ansible Galaxy
 
 on:
   release:
-    types: [published, edited. created, released]
+    types: [published, edited, created]
 
 jobs:
   publish:
