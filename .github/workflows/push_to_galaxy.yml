@@ -1,0 +1,13 @@
+name: Publish ${{env.REPO_NAME}} on Ansible Galaxy
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish role
+        run: ansible-galaxy role import --token ${{secrets.GALAXY_TOKEN}} ${{github.REPOSITORY_OWNER}} ${{env.NAME}}
