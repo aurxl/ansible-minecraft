@@ -1,5 +1,7 @@
 # Ansible-Minecraft
 
+[![Publish role on Ansible Galaxy](https://github.com/aurxl/ansible-minecraft/actions/workflows/push_to_galaxy.yml/badge.svg?branch=main&event=release)](https://github.com/aurxl/ansible-minecraft/actions/workflows/push_to_galaxy.yml)
+
 #### Installing Minecraft vanilla or Fabric Server on Linux.
 
 This will create a minecraft user that will handle the minecraft server. This role will not configure or harden your linux server in any way. Take care of it yourself!
