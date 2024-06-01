@@ -1,4 +1,4 @@
-name: Publish ${{env.NAME}} on Ansible Galaxy
+name: Publish role on Ansible Galaxy
 
 on:
   release:
