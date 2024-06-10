@@ -42,6 +42,11 @@ See example [Fabric](#fabric) config below.
     -  1.19.4
     -  1.18.2
     -  1.17.1
+    -  1.16.5
+    -  1.15.2
+    -  1.14.4
+    -  1.13.2
+    -  1.12.2
 - `eula` (bool): Agree the EULA (https://aka.ms/MinecraftEULA)
   - Default: `false`
 - `custom_world` (string): Path to a local saved `world` directory
