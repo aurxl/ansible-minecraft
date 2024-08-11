@@ -63,7 +63,7 @@
       path: "{{ minecraft.path }}/world"
       state: absent
   notify: restart minecraft-server
-  when: remove_world is true
+  when: minecraft.remove_world is true
 
 - block:
   - name: Archive custom world
