@@ -37,7 +37,7 @@ See example [Fabric](#fabric) config below.
 - `version` (string): Minecraft version
   - Default: "latest"
   - available versions:
-    -  1.21
+    -  1.21.1
     -  1.20.6
     -  1.20.2
     -  1.19.4
