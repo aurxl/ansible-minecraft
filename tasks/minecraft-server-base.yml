@@ -60,10 +60,10 @@
 - name: Remove world
   become: true
   ansible.builtin.file:
-      path: "{{ minecraft.path }}/world"
-      state: absent
+    path: "{{ minecraft.path }}/world"
+    state: absent
   notify: restart minecraft-server
-  when: minecraft.remove_world is true
+  when: minecraft.remove_world or remove_world
 
 - block:
   - name: Archive custom world
