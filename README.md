@@ -29,7 +29,7 @@ ansible-galaxy role install aurxl.minecraft
 It is also possible to install a [fabric](https://fabricmc.net/) server in order to play with mods enabled.
 See example [Fabric](#fabric) config below.
 
-### Datapacks
+#### Install datapacks
 Install local saved datapacks or provide a download link to install datapacks to your Minecraft server.
 Have a look at [Datapacks](#datapacks) example config.
 
@@ -205,7 +205,7 @@ minecraft:
   max_mem: 4
 ```
 
-### Datapcks
+#### Datapcks
 ``` yaml
 minecraft:
   version: latest
