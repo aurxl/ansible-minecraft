@@ -1,4 +1,5 @@
 ---
+remove_world: false
 minecraft: {}
 default_minecraft:
   path: "/opt/minecraft-server"
