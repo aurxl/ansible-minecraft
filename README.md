@@ -29,6 +29,9 @@ ansible-galaxy role install aurxl.minecraft
 It is also possible to install a [fabric](https://fabricmc.net/) server in order to play with mods enabled.
 See example [Fabric](#fabric) config below.
 
+### Datapacks
+Install local saved datapacks or provide a download link to install datapacks to your Minecraft server.
+Have a look at [Datapacks](#datapacks) example config.
 
 ## Options
 #### General Server Options:
@@ -65,6 +68,12 @@ See example [Fabric](#fabric) config below.
 - `server_properties` (dict): Set the usual options from `server.properties` file
   - Default: Default `server.properties`
   - Note, that `-` and `.` **must** be replaced by `_`
+- `datapacks` (list): A list of datapacks to be installed
+  - default: []
+  - Upload local file (`file`)
+  - Download datapack (`url`)
+    - optionally provide a checksum (`checksum`)
+      - `<sha>:<checksum>`
 
 #### Fabric server options
 - `fabric` (dict): Install Fabric server
@@ -83,7 +92,6 @@ See example [Fabric](#fabric) config below.
     - `name`: file name
     - `content`: content of the config file
     - `path`: local path of a config file
-
 
 ### Find my mod version id on modrinth
 
@@ -195,3 +203,16 @@ minecraft:
   min_mem: 2
   max_mem: 4
 ```
+
+### Datapcks
+``` yaml
+minecraft:
+  version: latest
+  eula: true
+
+  datapacks:
+    - url: https://cdn.modrinth.com/data/.../FOO.zip
+      checksum: sha256:Ch3CksUm
+    - file: files/datapack.zip
+```
+
