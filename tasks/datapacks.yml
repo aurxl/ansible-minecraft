@@ -1,0 +1,30 @@
+---
+- name: Directory world/datapacks is present
+  become: true
+  ansible.builtin.file:
+    path: "{{ minecraft.path }}/world/datapacks"
+    owner: "{{ minecraft_user_name }}"
+    group: "{{ minecraft_user_name }}"
+    mode: u=rwx,g=rwx,o=rw
+    state: directory
+
+- name: Copy local datapack
+  become: true
+  ansible.builtin.copy:
+    src: "{{ datapack.file }}"
+    dest: "{{ minecraft.path }}/world/datapacks/"
+    owner: "{{ minecraft_user_name }}"
+    group: "{{ minecraft_user_name }}"
+    mode: u=rw,g=rw,o=r
+  when: datapack.file is defined
+
+- name: Download datapack
+  become: true
+  ansible.builtin.get_url:
+    url: "{{ datapack.url }}"
+    dest: "{{ minecraft.path }}/world/datapacks/"
+    checksum: "{{ datapack.checksum | default('') }}"
+    owner: "{{ minecraft_user_name }}"
+    group: "{{ minecraft_user_name }}"
+    mode: u=rw,g=rw,o=r
+  when: datapack.url is defined

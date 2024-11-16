@@ -47,3 +47,10 @@
 - name: Include Minecraft fabric server stuff
   ansible.builtin.include_tasks: fabric/minecraft-server-fabric.yml
   when: minecraft.fabric.enabled
+
+- name: Include Minecraft datapacks installation
+  ansible.builtin.include_tasks: datapacks.yml
+  loop: "{{ minecraft.datapacks | default([]) }}"
+  loop_control:
+    loop_var: "datapack"
+
