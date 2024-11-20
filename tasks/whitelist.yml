@@ -11,8 +11,14 @@
     msg: "Failed to find user {{ name }}."
   when: http_response.status != 200
 
+- name: Convert UUID format
+  ansible.builtin.set_fact:
+    player:
+      uuid: "{{ http_response.json.id[0:7] + '-' + http_response.json.id[8:11] + '-' + http_response.json.id[12:15] + '-' + http_response.json.id[16:19] + '-' + http_response.json.id[20:31] }}"
+      name: "{{ http_response.json.name }}"
+
 - name: Save name and UUID
   ansible.builtin.set_fact:
-    full_whitelist: "{{ full_whitelist + [http_response.json] }}"
+    full_whitelist: "{{ full_whitelist + [player] }}"
   when: http_response.status == 200
 
