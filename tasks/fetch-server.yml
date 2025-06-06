@@ -1,0 +1,40 @@
+---
+- name: Get Version Manifest from Mojang
+  delegate_to: localhost
+  ansible.builtin.uri:
+    url: "{{ mojang_version_manifest }}"
+    return_content: true
+  register: version_manifest
+
+- name: Find Version of "latest"
+  set_fact:
+    minecraft_version: "{{ version_manifest.latest.release }}"
+  when: minecraft.version == "latest"
+
+- name: Set Version
+  set_fact:
+    minecraft_version: "{{ minecraft.version }}"
+  when: minecraft.version != "latest"
+
+- name: Extract version metadata URL
+  set_fact:
+    minecraft_metadata_url: "{{ (version_manifest.json.versions | selectattr('id', 'equalto', minecraft_version) | list).0.url }}"
+
+- name: Get version metadata
+  delegate_to: localhost
+  uri:
+    url: "{{ minecraft_metadata_url }}"
+    return_content: true
+  register: minecraft_version_metadata
+
+- name: Extract server jar SHA
+  set_fact:
+    instance:
+      version: "{{ minecraft_version }}"
+      sha: "{{ minecraft_version_metadata.json.downloads.server.sha1 }}"
+      javaVersion: "{{ minecraft_version_metadata.json.javaVersion.majorVersion }}"
+      downloadUrl: "{{ minecraft_version_metadata.json.downloads.server.url }}"
+
+- name: Print instance infos
+  debug:
+    msg: "Using the following: {{ instance }}"

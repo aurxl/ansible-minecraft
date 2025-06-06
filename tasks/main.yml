@@ -6,6 +6,9 @@
 - name: Sanity checks
   ansible.builtin.include_tasks: sanity-checks.yml
 
+- name: Fetch Version infos
+  ansible.builtin.include_tasks: fetch-server.yml
+
 - name: Add tmux to pkgs
   ansible.builtin.set_fact:
     pkgs: "{{ pkgs + ['tmux'] }}"

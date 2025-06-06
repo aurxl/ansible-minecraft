@@ -2,8 +2,8 @@
 - name: Server JAR is present
   become: true
   ansible.builtin.get_url:
-    url: "{{ instance_infos.url }}"
-    checksum: "sha1:{{ instance_infos.sha1 }}"
+    url: "{{ instance.downloadUrl }}"
+    checksum: "sha1:{{ instance.sha }}"
     owner: "{{ minecraft_user_name }}"
     group: "{{ minecraft_user_name }}"
     dest: "{{ minecraft.path }}/server.jar"

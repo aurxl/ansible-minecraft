@@ -35,24 +35,3 @@
       fail_msg: "Local mods dir not found ({{ minecraft.fabric.local_mods }})"
   when: minecraft.fabric.local_mods != ''
 
-- block:
-  - name: Set instance infos
-    set_fact:
-      instance_infos: "{{ item }}"
-    when: item.version == minecraft.version
-    loop: "{{ versions }}"
-  when: minecraft.version != "latest"
-
-- name: set instance infos
-  set_fact:
-    instance_infos: "{{ versions[0] }}"
-  when: minecraft.version == "latest"
-
-- name: Sanity check - Available version
-  assert:
-    that: instance_infos is defined
-    fail_msg: "Minecraft version {{ minecraft.version }} not available."
-
-- name: Sanity check - Using following
-  debug:
-    var: instance_infos

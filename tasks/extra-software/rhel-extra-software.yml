@@ -1,7 +1,7 @@
 ---
 - name: Add java to pkgs
   ansible.builtin.set_fact:
-    pkgs: "{{ pkgs + ['java-{{ instance_infos.javaVersion }}-openjdk-headless'] }}"
+    pkgs: "{{ pkgs + ['java-{{ instance.javaVersion }}-openjdk-headless'] }}"
 
 - name: Install software
   become: true

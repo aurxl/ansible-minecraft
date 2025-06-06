@@ -20,9 +20,9 @@ User={{ minecraft_user_name }}
 Group={{ minecraft_user_name }}
 
 {% if ansible_facts["os_family"] == "RedHat" %}
-Environment="Java=/usr/lib/jvm/jre-{{ instance_infos.javaVersion }}-openjdk/bin/java"
+Environment="Java=/usr/lib/jvm/jre-{{ instance.javaVersion }}-openjdk/bin/java"
 {% else %}
-Environment="Java=/usr/lib/jvm/java-{{ instance_infos.javaVersion }}-openjdk-amd64/bin/java"
+Environment="Java=/usr/lib/jvm/java-{{ instance.javaVersion }}-openjdk-amd64/bin/java"
 {% endif %}
 
 ExecStart=/bin/sh -c \

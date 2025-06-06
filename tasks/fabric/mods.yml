@@ -8,7 +8,7 @@
 
 - name: Fabric - Check available mod versions with minecraft version
   ansible.builtin.assert:
-    that: instance_infos.version in mod_infos.json.game_versions
+    that: instance.version in mod_infos.json.game_versions
     success_msg: "Mod {{ mod.name }} compatible with minecraft version."
     fail_msg: |
       Mod {{ mod }} incompatible with minecraft version.

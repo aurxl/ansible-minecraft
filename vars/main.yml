@@ -11,6 +11,7 @@ mojang_api_username: https://api.mojang.com/users/profiles/minecraft/
 modrinth_api_project: https://api.modrinth.com/v2/project/
 fabric_installer_url: https://maven.fabricmc.net/net/fabricmc/fabric-installer/1.0.1/fabric-installer-1.0.1.jar
 fabric_installer_sha512: 6e77702af63d9eb6e83adb01aa96a6e057811f524a7787ae48519cd85352f142c30a35f9d9c7794164726eb11e12ce664da6c3a40c8ada3e0294063f38f4636b
+mojang_version_manifest: https://piston-meta.mojang.com/mc/game/version_manifest_v2.json
 
 vanillapp_mods:
   - name: lithium
@@ -18,63 +19,3 @@ vanillapp_mods:
 
 pkgs: []
 
-versions:
-  - url:  https://piston-data.mojang.com/v1/objects/45810d238246d90e811d896f87b14695b7fb6839/server.jar
-    sha1: 45810d238246d90e811d896f87b14695b7fb6839
-    version: 1.21.3
-    javaVersion: 21
-  
-  - sha1: 59353fb40c36d304f2035d51e7d6e6baa98dc05c
-    url: https://piston-data.mojang.com/v1/objects/59353fb40c36d304f2035d51e7d6e6baa98dc05c/server.jar
-    version: 1.21.1
-    javaVersion: 21
-
-  - url: https://piston-data.mojang.com/v1/objects/145ff0858209bcfc164859ba735d4199aafa1eea/server.jar
-    sha1: 145ff0858209bcfc164859ba735d4199aafa1eea
-    version: 1.20.6
-    javaVersion: 21
-
-  - url: https://piston-data.mojang.com/v1/objects/5b868151bd02b41319f54c8d4061b8cae84e665c/server.jar
-    sha1: 5b868151bd02b41319f54c8d4061b8cae84e665c
-    version: 1.20.2
-    javaVersion: 17
-
-  - url: https://piston-data.mojang.com/v1/objects/8f3112a1049751cc472ec13e397eade5336ca7ae/server.jar
-    sha1: 8f3112a1049751cc472ec13e397eade5336ca7ae
-    version: 1.19.4
-    javaVersion: 17
-
-  - url: https://piston-data.mojang.com/v1/objects/c8f83c5655308435b3dcf03c06d9fe8740a77469/server.jar
-    sha1: c8f83c5655308435b3dcf03c06d9fe8740a77469
-    version: 1.18.2
-    javaVersion: 17
-
-  - url: https://piston-data.mojang.com/v1/objects/a16d67e5807f57fc4e550299cf20226194497dc2/server.jar
-    sha1: a16d67e5807f57fc4e550299cf20226194497dc2
-    version: 1.17.1
-    javaVersion: 16
-
-  - sha1: 1b557e7b033b583cd9f66746b7a9ab1ec1673ced
-    url: https://piston-data.mojang.com/v1/objects/1b557e7b033b583cd9f66746b7a9ab1ec1673ced/server.jar
-    version: 1.16.5
-    javaVersion: 8
-  
-  - sha1: bb2b6b1aefcd70dfd1892149ac3a215f6c636b07
-    url: https://piston-data.mojang.com/v1/objects/bb2b6b1aefcd70dfd1892149ac3a215f6c636b07/server.jar
-    version: 1.15.2
-    javaVersion: 8
-  
-  - sha1: 3dc3d84a581f14691199cf6831b71ed1296a9fdf
-    url: https://piston-data.mojang.com/v1/objects/3dc3d84a581f14691199cf6831b71ed1296a9fdf/server.jar
-    version: 1.14.4
-    javaVersion: 8
-  
-  - sha1: 3737db93722a9e39eeada7c27e7aca28b144ffa7
-    url: https://piston-data.mojang.com/v1/objects/3737db93722a9e39eeada7c27e7aca28b144ffa7/server.jar
-    version: 1.13.2
-    javaVersion: 8
-  
-  - sha1: 886945bfb2b978778c3a0288fd7fab09d315b25f
-    url: https://piston-data.mojang.com/v1/objects/886945bfb2b978778c3a0288fd7fab09d315b25f/server.jar
-    version: 1.12.2
-    javaVersion: 8

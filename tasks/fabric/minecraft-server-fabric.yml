@@ -31,7 +31,7 @@
 - name: Fabric - Install Fabric
   become: true
   become_user: "{{ minecraft_user_name }}"
-  ansible.builtin.command: "java -jar {{ fabric_installer_info.dest }} server -mcversion {{ instance_infos.version }}"
+  ansible.builtin.command: "java -jar {{ fabric_installer_info.dest }} server -mcversion {{ instance.version }}"
   args:
     chdir: "{{ minecraft.path }}"
   notify: restart minecraft-server

@@ -1,7 +1,7 @@
 ---
 - name: Add java to pkgs
   ansible.builtin.set_fact:
-    pkgs: "{{ pkgs + ['openjdk-{{ instance_infos.javaVersion }}-jre-headless'] }}"
+    pkgs: "{{ pkgs + ['openjdk-{{ instance.javaVersion }}-jre-headless'] }}"
 
 - name: Add acl to pkgs
   ansible.builtin.set_fact:
